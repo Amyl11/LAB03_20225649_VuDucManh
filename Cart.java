@@ -54,4 +54,21 @@ public class Cart {
         System.out.println(bill);
 	}
 	
+	public void searchbyId(int ID) {
+		if(ID >= qtyOrdered) {
+			System.out.println("No item match your search!");
+			return;
+		}
+		System.out.println(itemsOrdered[ID].toString());
+	}
+
+	public void searchbyTitle(String title) {
+		for(int i=0; i<qtyOrdered; i++) {
+			if(itemsOrdered[i].getTitle().equals(title)) {
+				System.out.println(itemsOrdered[i].toString());
+				return;
+			}
+		}
+		System.out.println("No item match your search!");
+	}
 }
