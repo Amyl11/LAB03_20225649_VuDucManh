@@ -1,3 +1,6 @@
+package hust.hespi.aims;
+import hust.hespi.aims.cart.Cart;
+import hust.hespi.aims.disc.DigitalVideoDisc;
 
 public class Aims {
 

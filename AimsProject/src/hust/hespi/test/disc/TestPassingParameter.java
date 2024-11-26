@@ -1,3 +1,5 @@
+package hust.hespi.test.disc;
+import hust.hespi.aims.disc.DigitalVideoDisc;
 
 public class TestPassingParameter {
 
