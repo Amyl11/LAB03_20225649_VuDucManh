@@ -59,7 +59,6 @@ public class DigitalVideoDisc {
 		this.id = nbDigitalVideoDiscs++;
 	}
 	
-	
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -75,4 +74,9 @@ public class DigitalVideoDisc {
 	public void setCost(float cost) {
 		this.cost = cost;
 	}
+
+	public String toString() {
+		return ("DVD - [" + title +"] - ["+ category +"] - ["+ director +"] - ["+ length +"]: "+ cost + "$\n");
+	}
+
 }
