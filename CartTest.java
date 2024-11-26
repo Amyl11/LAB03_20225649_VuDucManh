@@ -19,6 +19,14 @@ public class CartTest {
 
 
 		cart.print();
+		
 
+		cart.searchbyId(0);
+		cart.searchbyId(1);
+		cart.searchbyId(2);
+		cart.searchbyId(4);
+
+		cart.searchbyTitle("The Lion King");
+		cart.searchbyTitle("Hello World");
 	}
 }
