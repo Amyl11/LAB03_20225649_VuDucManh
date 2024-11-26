@@ -1,4 +1,7 @@
+package hust.hespi.aims.store;
 import java.util.LinkedList;
+
+import hust.hespi.aims.disc.DigitalVideoDisc;
 
 public class Store {
 	private LinkedList<DigitalVideoDisc> itemsInStore = new LinkedList<DigitalVideoDisc>();
