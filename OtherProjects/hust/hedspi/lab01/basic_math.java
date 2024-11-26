@@ -1,3 +1,4 @@
+package hust.hedspi.lab01;
 import java.util.Scanner;
 
 public class basic_math {
