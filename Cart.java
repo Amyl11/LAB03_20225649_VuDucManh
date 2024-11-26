@@ -43,4 +43,15 @@ public class Cart {
 		}
 		return sum;
 	}
+
+	public void print() {
+		StringBuilder bill = new StringBuilder("*********************CART************************** \nOrdered items: \n");
+		for(int i=0; i<qtyOrdered; i++) {
+			bill.append(i+1 + ". " +itemsOrdered[i].toString());
+		}
+		bill.append("Total: " + totalCost() + " $\n");
+        bill.append("***************************************************\n");
+        System.out.println(bill);
+	}
+	
 }
