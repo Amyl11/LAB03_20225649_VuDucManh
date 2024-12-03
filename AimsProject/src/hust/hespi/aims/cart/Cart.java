@@ -1,76 +1,91 @@
 package hust.hespi.aims.cart;
-import hust.hespi.aims.disc.DigitalVideoDisc;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import hust.hespi.aims.media.Media;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20;
-	private int qtyOrdered;
-	private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc [MAX_NUMBERS_ORDERED];
+	private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
 	
-	public int addDigitalVideoDisc(DigitalVideoDisc disc) {
-		if (qtyOrdered == MAX_NUMBERS_ORDERED) {
-			System.out.println("I'm almost full!");
-			return 0;
-		} else {
-			itemsOrdered[qtyOrdered] = disc;
-			qtyOrdered ++;
-			System.out.println("The DVD " + '\"' + disc.getTitle() + '\"' + " has been added!");
-			return 1;
+	public int addMedia(Media media) {
+		for(Media i: itemsOrdered) {
+			if(i.equals(media)) {
+				System.out.println("This media already exists!");
+				return 0;
+			}
 		}
+		itemsOrdered.add(media);
+		System.out.println("The Media " + '\"' + media.getTitle() + '\"' + " has been added!");
+		return 1;
 	}
 	
-	public int removeDigitalVideoDisc(DigitalVideoDisc disc) {
-		if (qtyOrdered == 0) {
-			System.out.println("Nothing in your cart!");
-			return 0;
-		}
-		for(int i = 0; i<qtyOrdered; i++) {
-			if(itemsOrdered[i].equals(disc)) {
-				for(int j = i; j<qtyOrdered-1; j++) {
-					itemsOrdered[i] = itemsOrdered[i+1];
-				}
-				itemsOrdered[qtyOrdered-1] = null;
-				qtyOrdered--;
-				System.out.println("Remove disc " + '\"' + disc.getTitle() + '\"' + " successfully!");
+	public int removeMedia(Media media) {
+		for(Media i: itemsOrdered) {
+			if(i.equals(media)) {
+				itemsOrdered.remove(media);
+				System.out.println("The media \"" + media.getTitle() + "\" has been removed!");
 				return 1;
 			}
 		}
-		System.out.println("Can't found this disc in your cart!");
-		return 0;		
+		System.out.println("This media does not exist!");
+		return 0;
 	}
 	
 	public float totalCost() {
 		float sum = 0;
-		for(int i=0; i<qtyOrdered; i++) {
-			sum += itemsOrdered[i].getCost();
+		for(Media i: itemsOrdered) {
+			sum += i.getCost();
 		}
 		return sum;
 	}
 
 	public void print() {
 		StringBuilder bill = new StringBuilder("*********************CART************************** \nOrdered items: \n");
-		for(int i=0; i<qtyOrdered; i++) {
-			bill.append(i+1 + ". " +itemsOrdered[i].toString());
+		int stt = 0;
+		for(Media i: itemsOrdered) {
+			bill.append(stt + ". " +i.toString());
+			stt++;
 		}
 		bill.append("Total: " + totalCost() + " $\n");
         bill.append("***************************************************\n");
         System.out.println(bill);
 	}
 	
-	public void searchbyId(int ID) {
-		if(ID >= qtyOrdered) {
+	public Media searchbyId(int ID) {
+		if(ID >= itemsOrdered.size()) {
 			System.out.println("No item match your search!");
-			return;
+			return null;
 		}
-		System.out.println(itemsOrdered[ID].toString());
+		System.out.println(itemsOrdered.get(ID).toString());
+		return itemsOrdered.get(ID);
 	}
 
-	public void searchbyTitle(String title) {
-		for(int i=0; i<qtyOrdered; i++) {
-			if(itemsOrdered[i].getTitle().equals(title)) {
-				System.out.println(itemsOrdered[i].toString());
-				return;
+	public Media searchbyTitle(String title) {
+		for(Media i: itemsOrdered) {
+			if(i.getTitle().equals(title)) {
+				System.out.println(i.toString());
+				return i;
 			}
 		}
 		System.out.println("No item match your search!");
+		return null;
+	}
+	
+	public int getNumberOrdered() {
+		return itemsOrdered.size();
+	}
+	
+	public void sortByTitleCost() {
+		Collections.sort(itemsOrdered, Media.COMPARE_BY_TITLE_COST);
+	}
+	
+	public void sortByCostTitle() {
+		Collections.sort(itemsOrdered, Media.COMPARE_BY_COST_TITLE);
+	}
+	
+	public void clear() {
+		itemsOrdered.clear();
+		System.out.println("All item cleared!");
 	}
 }

@@ -1,3 +1,39 @@
-Question: Is JAVA a Pass by Value or a Pass by Reference programming language? 
-A: Java là ngôn ngữ lập trình pass by value
+Question: Alternatively, to compare items in the cart, instead of using Comparator, we can use the Comparable interface and override the compareTo()method. You can refer to the Java docs to see the information of this interface. 
+Suppose we are taking this Comparable interface approach.
+-	What class should implement the Comparable interface?
+-	In those classes, how should you implement the compareTo()method be to reflect the ordering that we want?
+-	Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+-	Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
 
+
+Answer:
+-	Class Media nên implement Comparable interface, vì Media là nơi cần định nghĩa quy tắc sắp xếp mặc định.
+-	ví dụ với trường hợp compare by title cost:
+
+	public int compareTo(Media other) {
+		//So sánh title tăng dần
+		int titleComparison = this.title.compareTo(other.title);
+		if (titleComparison != 0) {
+        		return titleComparison;
+    		}
+    		//Nếu title giống nhau, so sánh cost giảm dần
+    		return Double.compare(other.cost, this.cost);
+	}
+-	Không thể, bởi vì chỉ có thể định nghĩa phương thức compareTo() theo một quy tắc.
+-	Bởi vì đang sử dụng phương pháp override phương thức compareTo() nên để sắp xếp kiểu DVD theo một quy tắc riêng thì chỉ cần override phương thức compareTo() trong class DVDs theo quy tắc riêng đó(phương thức compareTo() trong class Media đã được override như trên)
+	public int compare(DVD d1, DVD d2) {
+        	//So sánh theo title tăng dần
+        int titleComparison = d1.getTitle().compareTo(d2.getTitle());
+	if (titleComparison != 0) {
+            return titleComparison;
+        }
+        
+		//Nếu title giống nhau, so sánh chiều dài giảm dần
+        int lengthComparison = Integer.compare(d2.getLength(), d1.getLength());
+        if (lengthComparison != 0) {
+            return lengthComparison;
+        }
+        
+		// Nếu chiều dài giống nhau, so sánh cost giảm dần
+        return Double.compare(d2.getCost(), d1.getCost());
+    }

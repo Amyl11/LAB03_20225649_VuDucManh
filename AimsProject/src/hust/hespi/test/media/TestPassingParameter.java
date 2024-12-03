@@ -1,5 +1,5 @@
-package hust.hespi.test.disc;
-import hust.hespi.aims.disc.DigitalVideoDisc;
+package hust.hespi.test.media;
+import hust.hespi.aims.media.DigitalVideoDisc;
 
 public class TestPassingParameter {
 
@@ -17,19 +17,10 @@ public class TestPassingParameter {
 	}
 	
 	public static void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-        DigitalVideoDisc tmp = new DigitalVideoDisc(dvd1.getTitle(), dvd1.getCategory(), dvd1.getDirector(), dvd1.getLength(), dvd1.getCost());
-
-        dvd1.setTitle(dvd2.getTitle());
-        dvd1.setCategory(dvd2.getCategory());
-        dvd1.setDirector(dvd2.getDirector());
-        dvd1.setLength(dvd2.getLength());
-        dvd1.setCost(dvd2.getCost());
-
-        dvd2.setTitle(tmp.getTitle());
-        dvd2.setCategory(tmp.getCategory());
-        dvd2.setDirector(tmp.getDirector());
-        dvd2.setLength(tmp.getLength());
-        dvd2.setCost(tmp.getCost());
+       String tmp = dvd1.getTitle();
+       dvd1.setTitle(dvd2.getTitle());
+       dvd2.setTitle(tmp);
+        
     }
 	
 	public static void changeTitle(DigitalVideoDisc dvd, String title) {
